@@ -81,10 +81,6 @@ struct ExpressibleByStringLiteralWrapper<T: ExpressibleByStringLiteral>: Newtype
     let rawValue: T
 }
 
-struct ExpressibleByIntegerLiteralWrapper<T: ExpressibleByIntegerLiteral>: Newtype, ExpressibleByIntegerLiteral {
-    let rawValue: T
-}
-
 struct ExpressibleByFloatLiteralWrapper<T: ExpressibleByFloatLiteral>: Newtype, ExpressibleByFloatLiteral {
     let rawValue: T
 }
