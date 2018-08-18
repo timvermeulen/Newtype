@@ -69,14 +69,6 @@ struct ExpressibleByIntegerLiteralWrapper<T: ExpressibleByIntegerLiteral>: Newty
     let rawValue: T
 }
 
-struct ExpressibleByUnicodeScalarLiteralWrapper<T: ExpressibleByUnicodeScalarLiteral>: Newtype, ExpressibleByUnicodeScalarLiteral {
-    let rawValue: T
-}
-
-struct ExpressibleByExtendedGraphemeClusterLiteralWrapper<T: ExpressibleByExtendedGraphemeClusterLiteral>: Newtype, ExpressibleByExtendedGraphemeClusterLiteral {
-    let rawValue: T
-}
-
 struct ExpressibleByStringLiteralWrapper<T: ExpressibleByStringLiteral>: Newtype, ExpressibleByStringLiteral {
     let rawValue: T
 }
@@ -99,4 +91,16 @@ struct ExpressibleByNilLiteralWrapper<T: ExpressibleByNilLiteral>: Newtype, Expr
 
 struct ExpressibleByBooleanLiteralWrapper<T: ExpressibleByBooleanLiteral>: Newtype, ExpressibleByBooleanLiteral {
     let rawValue: T
+}
+
+struct StringWrapper: Newtype, ExpressibleByStringLiteral {
+    let rawValue: String
+}
+
+struct IntWrapper: Newtype, ExpressibleByIntegerLiteral {
+    let rawValue: Int
+}
+
+struct FloatWrapper: Newtype, ExpressibleByFloatLiteral {
+    let rawValue: Float
 }

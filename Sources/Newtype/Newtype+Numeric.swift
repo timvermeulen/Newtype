@@ -177,6 +177,18 @@ public extension Newtype where Self: FixedWidthInteger, RawValue: FixedWidthInte
         return .init(rawValue: ~x.rawValue)
     }
     
+    static func &= (lhs: inout Self, rhs: Self) {
+        lhs.withRawValue { $0 &= rhs.rawValue }
+    }
+    
+    static func |= (lhs: inout Self, rhs: Self) {
+        lhs.withRawValue { $0 |= rhs.rawValue }
+    }
+    
+    static func ^= (lhs: inout Self, rhs: Self) {
+        lhs.withRawValue { $0 ^= rhs.rawValue }
+    }
+    
     init?<T: BinaryFloatingPoint>(exactly source: T) {
         guard let rawValue = RawValue(exactly: source) else { return nil }
         self.init(rawValue: rawValue)

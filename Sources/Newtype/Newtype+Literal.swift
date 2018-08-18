@@ -1,20 +1,4 @@
-public extension Newtype where Self: ExpressibleByUnicodeScalarLiteral, RawValue: ExpressibleByUnicodeScalarLiteral {
-    init(unicodeScalarLiteral value: RawValue.UnicodeScalarLiteralType) {
-        self.init(rawValue: .init(unicodeScalarLiteral: value))
-    }
-}
-
-public extension Newtype where Self: ExpressibleByExtendedGraphemeClusterLiteral, RawValue: ExpressibleByExtendedGraphemeClusterLiteral {
-    typealias UnicodeScalarLiteralType = RawValue.UnicodeScalarLiteralType
-    
-    init(extendedGraphemeClusterLiteral value: RawValue.ExtendedGraphemeClusterLiteralType) {
-        self.init(rawValue: .init(extendedGraphemeClusterLiteral: value))
-    }
-}
-
 public extension Newtype where Self: ExpressibleByStringLiteral, RawValue: ExpressibleByStringLiteral {
-    typealias ExtendedGraphemeClusterLiteralType = RawValue.ExtendedGraphemeClusterLiteralType
-    
     init(stringLiteral value: RawValue.StringLiteralType) {
         self.init(rawValue: .init(stringLiteral: value))
     }
