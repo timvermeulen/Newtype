@@ -148,11 +148,19 @@ public extension Newtype where Self: SignedInteger, RawValue: SignedInteger {
     static var isSigned: Bool {
         return RawValue.isSigned
     }
+    
+    var description: String {
+        return rawValue.description
+    }
 }
 
 public extension Newtype where Self: UnsignedInteger, RawValue: UnsignedInteger {
     static var isSigned: Bool {
         return RawValue.isSigned
+    }
+    
+    var description: String {
+        return rawValue.description
     }
 }
 
@@ -285,12 +293,22 @@ public extension Newtype where Self: FloatingPoint, RawValue: FloatingPoint {
     }
     
     var magnitude: Self {
+        #if swift(>=4.2)
         return .init(rawValue: rawValue.magnitude)
+        #else
+        return .init(rawValue: rawValue.magnitude as! RawValue)
+        #endif
     }
     
     static func < (lhs: Self, rhs: Self) -> Bool {
         return lhs.rawValue < rhs.rawValue
     }
+    
+    #if swift(>=4.2)
+    init<Source: BinaryInteger>(_ value: Source) {
+        self.init(rawValue: .init(value))
+    }
+    #endif
     
     init(sign: FloatingPointSign, exponent: RawValue.Exponent, significand: Self) {
         self.init(rawValue: .init(sign: sign, exponent: exponent, significand: significand.rawValue))
@@ -300,7 +318,43 @@ public extension Newtype where Self: FloatingPoint, RawValue: FloatingPoint {
         self.init(rawValue: .init(signOf: signOf.rawValue, magnitudeOf: magnitudeOf.rawValue))
     }
     
-    init<Source: BinaryInteger>(_ value: Source) {
+    init(_ value: UInt8) {
+        self.init(rawValue: .init(value))
+    }
+    
+    init(_ value: Int8) {
+        self.init(rawValue: .init(value))
+    }
+    
+    init(_ value: UInt16) {
+        self.init(rawValue: .init(value))
+    }
+    
+    init(_ value: Int16) {
+        self.init(rawValue: .init(value))
+    }
+    
+    init(_ value: UInt32) {
+        self.init(rawValue: .init(value))
+    }
+    
+    init(_ value: Int32) {
+        self.init(rawValue: .init(value))
+    }
+    
+    init(_ value: UInt64) {
+        self.init(rawValue: .init(value))
+    }
+    
+    init(_ value: Int64) {
+        self.init(rawValue: .init(value))
+    }
+    
+    init(_ value: UInt) {
+        self.init(rawValue: .init(value))
+    }
+    
+    init(_ value: Int) {
         self.init(rawValue: .init(value))
     }
     
@@ -429,14 +483,28 @@ public extension Newtype where Self: FloatingPoint, RawValue: FloatingPoint {
     }
 }
 
-public extension Newtype where Self: BinaryFloatingPoint, RawValue: BinaryFloatingPoint {
-    init<Source: BinaryInteger>(_ value: Source) {
-        self.init(rawValue: .init(value))
-    }
-    
+public extension Newtype where Self: BinaryFloatingPoint, RawValue: BinaryFloatingPoint {    
     init?<T: BinaryInteger>(exactly source: T) {
         guard let rawValue = RawValue(exactly: source) else { return nil }
         self.init(rawValue: rawValue)
+    }
+    
+    #if swift(>=4.2)
+    init<Source: BinaryInteger>(_ value: Source) {
+        self.init(rawValue: .init(value))
+    }
+    #endif
+    
+    init(_ value: Float) {
+        self.init(rawValue: .init(value))
+    }
+    
+    init(_ value: Double) {
+        self.init(rawValue: .init(value))
+    }
+    
+    init(_ value: Float80) {
+        self.init(rawValue: .init(value))
     }
     
     static var radix: Int {

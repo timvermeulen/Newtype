@@ -23,9 +23,15 @@ public extension Newtype where Self: Equatable, RawValue: Equatable {
 }
 
 public extension Newtype where Self: Hashable, RawValue: Hashable {
+    #if swift(>=4.2)
     func hash(into hasher: inout Hasher) {
         rawValue.hash(into: &hasher)
     }
+    #else
+    var hashValue: Int {
+        return rawValue.hashValue
+    }
+    #endif
 }
 
 public extension Newtype where Self: Comparable, RawValue: Comparable {
