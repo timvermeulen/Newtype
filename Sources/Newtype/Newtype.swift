@@ -1,14 +1,14 @@
 public protocol Newtype {
-    associatedtype RawValue
+    associatedtype Base
     
-    var rawValue: RawValue { get }
-    init(rawValue: RawValue)
+    var base: Base { get }
+    init(base: Base)
 }
 
 internal extension Newtype {
-    mutating func withRawValue(_ block: (inout RawValue) throws -> Void) rethrows {
-        var copy = rawValue
-        try block(&copy)
-        self = .init(rawValue: copy)
+    mutating func withRawValue<T>(_ block: (inout Base) throws -> T) rethrows -> T {
+        var copy = base
+        defer { self = .init(base: copy) }
+        return try block(&copy)
     }
 }

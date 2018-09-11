@@ -1,57 +1,51 @@
 public extension Newtype where Self: CustomStringConvertible {
     var description: String {
-        return String(describing: rawValue)
+        return String(describing: base)
     }
 }
 
-public extension Newtype where Self: Encodable, RawValue: Encodable {
+public extension Newtype where Self: Encodable, Base: Encodable {
     func encode(to encoder: Encoder) throws {
-        try rawValue.encode(to: encoder)
+        try base.encode(to: encoder)
     }
 }
 
-public extension Newtype where Self: Decodable, RawValue: Decodable {
+public extension Newtype where Self: Decodable, Base: Decodable {
     init(from decoder: Decoder) throws {
-        self.init(rawValue: try .init(from: decoder))
+        self.init(base: try .init(from: decoder))
     }
 }
 
-public extension Newtype where Self: Equatable, RawValue: Equatable {
+public extension Newtype where Self: Equatable, Base: Equatable {
     static func == (left: Self, right: Self) -> Bool {
-        return left.rawValue == right.rawValue
+        return left.base == right.base
     }
 }
 
-public extension Newtype where Self: Hashable, RawValue: Hashable {
-    #if swift(>=4.2)
+public extension Newtype where Self: Hashable, Base: Hashable {
     func hash(into hasher: inout Hasher) {
-        rawValue.hash(into: &hasher)
+        base.hash(into: &hasher)
     }
-    #else
-    var hashValue: Int {
-        return rawValue.hashValue
-    }
-    #endif
 }
 
-public extension Newtype where Self: Comparable, RawValue: Comparable {
+public extension Newtype where Self: Comparable, Base: Comparable {
     static func < (left: Self, right: Self) -> Bool {
-        return left.rawValue < right.rawValue
+        return left.base < right.base
     }
 }
 
-public extension Newtype where Self: Strideable, RawValue: Strideable {
-    typealias Stride = RawValue.Stride
+public extension Newtype where Self: Strideable, Base: Strideable {
+    typealias Stride = Base.Stride
     
     static func < (lhs: Self, rhs: Self) -> Bool {
-        return lhs.rawValue < rhs.rawValue
+        return lhs.base < rhs.base
     }
     
-    func distance(to other: Self) -> RawValue.Stride {
-        return rawValue.distance(to: other.rawValue)
+    func distance(to other: Self) -> Base.Stride {
+        return base.distance(to: other.base)
     }
     
-    func advanced(by stride: RawValue.Stride) -> Self {
-        return .init(rawValue: rawValue.advanced(by: stride))
+    func advanced(by stride: Base.Stride) -> Self {
+        return .init(base: base.advanced(by: stride))
     }
 }

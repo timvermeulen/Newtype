@@ -2,105 +2,121 @@ import XCTest
 import Newtype
 
 struct CustomStringConvertibleWrapper<T: CustomStringConvertible>: Newtype, CustomStringConvertible {
-    let rawValue: T
+    let base: T
 }
 
 struct EncodableWrapper<T: Encodable>: Newtype, Encodable {
-    let rawValue: T
+    let base: T
 }
 
 struct DecodableWrapper<T: Decodable>: Newtype, Decodable {
-    let rawValue: T
+    let base: T
 }
 
 struct CodableWrapper<T: Codable>: Newtype, Codable {
-    let rawValue: T
+    let base: T
 }
 
 struct EquatableWrapper<T: Equatable>: Newtype, Equatable {
-    let rawValue: T
+    let base: T
 }
 
 struct HashableWrapper<T: Hashable>: Newtype, Hashable {
-    let rawValue: T
+    let base: T
 }
 
 struct ComparableWrapper<T: Comparable>: Newtype, Comparable {
-    let rawValue: T
+    let base: T
 }
 
 struct StrideableWrapper<T: Strideable>: Newtype, Strideable {
-    let rawValue: T
+    let base: T
 }
 
 struct NumericWrapper<T: Numeric>: Newtype, Numeric {
-    let rawValue: T
+    let base: T
 }
 
 struct BinaryIntegerWrapper<T: BinaryInteger>: Newtype, BinaryInteger {
-    let rawValue: T
+    let base: T
 }
 
 struct SignedNumericWrapper<T: SignedNumeric>: Newtype, SignedNumeric {
-    let rawValue: T
+    let base: T
 }
 
 struct SignedIntegerWrapper<T: SignedInteger>: Newtype, SignedInteger {
-    let rawValue: T
+    let base: T
 }
 
 struct UnsignedIntegerWrapper<T: UnsignedInteger>: Newtype, UnsignedInteger {
-    let rawValue: T
+    let base: T
 }
 
 struct FixedWidthIntegerWrapper<T: FixedWidthInteger>: Newtype, FixedWidthInteger {
-    let rawValue: T
+    let base: T
 }
 
 struct FloatingPointWrapper<T: FloatingPoint>: Newtype, FloatingPoint {
-    let rawValue: T
+    let base: T
 }
 
 struct BinaryFloatingPointWrapper<T: BinaryFloatingPoint>: Newtype, BinaryFloatingPoint {
-    let rawValue: T
+    let base: T
 }
 
 struct ExpressibleByIntegerLiteralWrapper<T: ExpressibleByIntegerLiteral>: Newtype, ExpressibleByIntegerLiteral {
-    let rawValue: T
+    let base: T
 }
 
 struct ExpressibleByStringLiteralWrapper<T: ExpressibleByStringLiteral>: Newtype, ExpressibleByStringLiteral {
-    let rawValue: T
+    let base: T
 }
 
 struct ExpressibleByFloatLiteralWrapper<T: ExpressibleByFloatLiteral>: Newtype, ExpressibleByFloatLiteral {
-    let rawValue: T
+    let base: T
 }
 
 struct ExpressibleByArrayLiteralWrapper<T: ExpressibleByArrayLiteral>: Newtype, ExpressibleByArrayLiteral {
-    let rawValue: T
+    let base: T
 }
 
 struct ExpressibleByDictionaryLiteralWrapper<T: ExpressibleByDictionaryLiteral>: Newtype, ExpressibleByDictionaryLiteral {
-    let rawValue: T
+    let base: T
 }
 
 struct ExpressibleByNilLiteralWrapper<T: ExpressibleByNilLiteral>: Newtype, ExpressibleByNilLiteral {
-    let rawValue: T
+    let base: T
 }
 
 struct ExpressibleByBooleanLiteralWrapper<T: ExpressibleByBooleanLiteral>: Newtype, ExpressibleByBooleanLiteral {
-    let rawValue: T
+    let base: T
+}
+
+struct SetAlgebraWrapper<T: SetAlgebra>: Newtype, SetAlgebra {
+    let base: T
+}
+
+struct IteratorProtocolWrapper<T: IteratorProtocol>: Newtype, IteratorProtocol {
+    let base: T
+}
+
+struct SequenceWrapper<T: Sequence>: Newtype, Sequence {
+    let base: T
+}
+
+struct CollectionWrapper<T: Collection>: Newtype, Collection {
+    let base: T
 }
 
 struct StringWrapper: Newtype, ExpressibleByStringLiteral {
-    let rawValue: String
+    let base: String
 }
 
 struct IntWrapper: Newtype, ExpressibleByIntegerLiteral {
-    let rawValue: Int
+    let base: Int
 }
 
 struct FloatWrapper: Newtype, ExpressibleByFloatLiteral {
-    let rawValue: Float
+    let base: Float
 }
